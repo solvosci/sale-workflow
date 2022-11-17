@@ -70,7 +70,7 @@ class TestSaleStockOrderSecondaryUnit(SavepointCase):
         self.order.order_line.write(
             {"secondary_uom_id": self.secondary_unit.id, "secondary_uom_qty": 5}
         )
-        self.order.order_line.onchange_secondary_uom()
+        self.order.order_line._onchange_helper_product_uom_for_secondary()
         self.order.action_confirm()
         picking = self.order.picking_ids
         self.assertEqual(picking.move_line_ids.secondary_uom_qty, 5.0)
